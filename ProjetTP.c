@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <unistd.h>
 ///declaration of TypeElement
 typedef int TypeElm;
 //typedef char TypeElm;
