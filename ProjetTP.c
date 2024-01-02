@@ -112,10 +112,29 @@ void createproject(char name[]) {
 void addmaintask(Queue* Q, Maintask* task) {
     Enqueue(Q, (TypeElm)task);
 }
-//adding a substack
-void addsubtask(Stack* S, Subtask* subtask) {
-    Push(S, (TypeElm)subtask);
+
+
+// adding a subtask
+void addsubtask(Maintask* maintask) {
+    if (maintask == NULL) {
+       printf("Error: Main task is NULL.\n");
+        return;
+    }
+
+    Subtask* newSubtask = malloc(sizeof(Subtask));
+    if (newSubtask == NULL) {
+        printf("Error: Memory allocation failed for subtask.\n");
+        return;
+    }
+
+    printf("Enter subtask name: ");
+    scanf("%s", newSubtask->name);
+    newSubtask->completed = false;
+    maintask->subtask = newSubtask;
+    printf("Subtask added successfully.\n")
 }
+
+
 //mark a task as completed
 void markcompletedtask(Queue* Q, char taskName[]) {
     Queue tempQ;
@@ -297,4 +316,3 @@ int main() {
 
     return 0;
 }
-
