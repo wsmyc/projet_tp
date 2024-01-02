@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include <stdbool.h>
-#include <string.h>
-#include <unistd.h>
+#include <stdio.h>
+#include<stdbool.h>
+
 // Declaration of TypeElement
 typedef int TypeElm;
 
@@ -104,19 +104,19 @@ typedef struct {
     bool completed;
     Subtask* subtask;
 } Maintask;
-
+//creating the projct
 void createproject(char name[]) {
     printf("The %s project was created\n", name);
 }
-
+//adding a main task
 void addmaintask(Queue* Q, Maintask* task) {
     Enqueue(Q, (TypeElm)task);
 }
-
+//adding a substack
 void addsubtask(Stack* S, Subtask* subtask) {
     Push(S, (TypeElm)subtask);
 }
-
+//mark a task as completed
 void markcompletedtask(Queue* Q, char taskName[]) {
     Queue tempQ;
     InitQueue(&tempQ);
@@ -140,7 +140,7 @@ void markcompletedtask(Queue* Q, char taskName[]) {
         Dequeue(&tempQ, NULL);
     }
 }
-
+//display existing tasks
 void viewtasks(Queue Q) {
     if (isQEmpty(Q)) {
         printf("There are no tasks.\n");
@@ -150,7 +150,7 @@ void viewtasks(Queue Q) {
 
         while (!isQEmpty(Q)) {
             Maintask* task = (Maintask*)Head(Q);
-            printf("- %s\n", task->name);
+            printf("- %s (%s)\n", task->name, task->completed ? "completed" : "not completed");
             Enqueue(&tempQ, Head(Q));
             Dequeue(&Q, NULL);
         }
@@ -171,8 +171,6 @@ void deletetask(Queue* Q, char taskName[]) {
         Maintask* task = (Maintask*)Head(*Q);
         if (strcmp(task->name, taskName) == 0) {
             printf("Task '%s' deleted successfully.\n", taskName);
-            // You can free the memory here if you're sure it's safe
-            // free(task);
         } else {
             Enqueue(&tempQ, Head(*Q));
         }
@@ -194,9 +192,9 @@ int main() {
     InitQueue(&taskQueue);
     InitStack(&subtaskStack);
 
-    char projectName[50] = "";
+    char project[15] = "";
 
-    printf("Hello user! This is the command menu:\n");
+    printf("Hello user! here's the command menu:\n");
     printf("1. Create a project\n");
     printf("2. Add a main Task\n");
     printf("3. Add Subtask\n");
@@ -211,16 +209,16 @@ int main() {
 
         switch (choice) {
             case 1:
-                if (projectName[0] == '\0') {
+                if (project[0] == '\0') {
                     printf("Enter project name: ");
-                    scanf("%s", projectName);
-                    createproject(projectName);
+                    scanf("%s", project);
+                    createproject(project);
                 } else {
                     printf("Project already exists.\n");
                 }
                 break;
             case 2:
-                if (projectName[0] == '\0') {
+                if (project[0] == '\0') {
                     printf("Create a project first.\n");
                 } else {
                     Maintask* newTask = malloc(sizeof(Maintask));
@@ -233,11 +231,11 @@ int main() {
                 }
                 break;
             case 3:
-                if (projectName[0] == '\0') {
+                if (project[0] == '\0') {
                     printf("Create a project first and add its main tasks.\n");
                 } else {
                     if (isQEmpty(taskQueue)) {
-                        printf("No main tasks available. If you want to add subtasks, you have to add main ones first.\n");
+                        printf("you need to first create main tasks.\n");
                     } else {
                         Maintask* currentTask = (Maintask*)Head(taskQueue);
                         Subtask* newSubtask = malloc(sizeof(Subtask));
@@ -251,7 +249,7 @@ int main() {
                 }
                 break;
             case 4:
-                if (projectName[0] == '\0') {
+                if (project[0] == '\0') {
                     printf("Create a project first.\n");
                 } else if (isQEmpty(taskQueue)) {
                     printf("No main tasks available to mark as completed.\n");
@@ -263,14 +261,14 @@ int main() {
                 }
                 break;
             case 5:
-                if (projectName[0] == '\0') {
+                if (project[0] == '\0') {
                     printf("Create a project first.\n");
                 } else {
                     viewtasks(taskQueue);
                 }
                 break;
             case 6:
-                if (projectName[0] == '\0') {
+                if (project[0] == '\0') {
                     printf("Create a project first.\n");
                 } else if (isQEmpty(taskQueue)) {
                     printf("No tasks available to delete.\n");
@@ -282,20 +280,21 @@ int main() {
                 }
                 break;
             case 7:
-                // Free memory here before exiting
                 while (!isQEmpty(taskQueue)) {
                     Maintask* task = (Maintask*)Head(taskQueue);
                     free(task);
                     Dequeue(&taskQueue, NULL);
                 }
-                printf("Exiting program.\n");
+                printf("end of the program.\n");
                 break;
             default:
-                printf("Invalid choice. Please enter a number between 1 and 7.\n");
+                printf("error.\n");
         }
     } while (choice != 7);
 
+
+    sleep(10);
+
     return 0;
 }
-
 
