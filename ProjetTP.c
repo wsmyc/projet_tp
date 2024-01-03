@@ -127,13 +127,12 @@ void addsubtask(Maintask* maintask) {
         return;
     }
 
-    printf("Enter subtask name: ");
+    printf("Enter subtask name: ");             ///here you ask for a subtask inside the procedure
     scanf("%s", newSubtask->name);
     newSubtask->completed = false;
     maintask->subtask = newSubtask;
-    printf("Subtask added successfully.\n")
+    printf("Subtask added successfully.\n");
 }
-
 
 //mark a task as completed
 void markcompletedtask(Queue* Q, char taskName[]) {
@@ -258,15 +257,10 @@ int main() {
                     } else {
                         Maintask* currentTask = (Maintask*)Head(taskQueue);
                         Subtask* newSubtask = malloc(sizeof(Subtask));
-                        printf("Enter subtask name: ");
-                        scanf("%s", newSubtask->name);
-                        newSubtask->completed = false;
-                        currentTask->subtask = newSubtask;
-                        addsubtask(&subtaskStack, newSubtask);
-                        printf("Subtask added successfully.\n");
+                        addsubtask(&subtaskStack);
                     }
                 }
-                break; 
+                break;
             case 4:
                 if (project[0] == '\0') {
                     printf("Create a project first.\n");
