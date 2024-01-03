@@ -249,7 +249,7 @@ int main() {
                     printf("Main task added successfully.\n");
                 }
                 break;
-            case 3:
+           case 3:
                 if (project[0] == '\0') {
                     printf("Create a project first and add its main tasks.\n");
                 } else {
@@ -266,7 +266,7 @@ int main() {
                         printf("Subtask added successfully.\n");
                     }
                 }
-                break;
+                break; 
             case 4:
                 if (project[0] == '\0') {
                     printf("Create a project first.\n");
