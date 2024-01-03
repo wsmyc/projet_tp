@@ -258,7 +258,6 @@ int main() {
                         Maintask* currentTask = (Maintask*)Head(taskQueue);
                         Subtask* newSubtask = malloc(sizeof(Subtask));
                         addsubtask(&subtaskStack);
-                        printf("Subtask added successfully.\n");
                     }
                 }
                 break;
