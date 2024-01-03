@@ -257,11 +257,6 @@ int main() {
                     } else {
                         Maintask* currentTask = (Maintask*)Head(taskQueue);
                         Subtask* newSubtask = malloc(sizeof(Subtask));
-                        printf("Enter subtask name: ");                                  ////you ask again for a subtask
-                        scanf("%s", newSubtask->name);
-                        newSubtask->completed = false;
-                        currentTask->subtask = newSubtask;
-                        //addsubtask(&subtaskStack, newSubtask);    ///this is a call with two parameters, it must be just with one parameter
                         addsubtask(&subtaskStack);
                         printf("Subtask added successfully.\n");
                     }
